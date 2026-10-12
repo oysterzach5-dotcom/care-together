@@ -33,7 +33,7 @@ const bookingSchema = z.object({
   hours_per_day: z.number().int().min(1).max(24),
   days: z.number().int().min(1).max(365),
   address: z.string().trim().min(1, "Address is required").max(300),
-  notes: z.string().max(1000).optional(),
+  notes: z.string().max(1000),
 });
 
 function CaregiverPage() {
@@ -63,7 +63,7 @@ function CaregiverPage() {
     e.preventDefault();
     if (!user || !c) return;
     const parsed = bookingSchema.safeParse(form);
-    if (!parsed.success) { toast.error(parsed.error.issues[0].message); return; }
+    if (!parsed.success) { toast.error(parsed.error.issues[0]?.message ?? "Invalid form"); return; }
     setSaving(true);
     const { error } = await supabase.from("bookings").insert({ ...parsed.data, caregiver_id: c.id, user_id: user.id });
     setSaving(false);

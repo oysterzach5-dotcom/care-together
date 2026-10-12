@@ -28,9 +28,9 @@ function Bookings() {
     },
   });
 
-  async function cancel(id: string) {
+  async function cancel(id: string): Promise<void> {
     const { error } = await supabase.from("bookings").update({ status: "cancelled" }).eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Booking cancelled");
     qc.invalidateQueries({ queryKey: ["bookings"] });
   }

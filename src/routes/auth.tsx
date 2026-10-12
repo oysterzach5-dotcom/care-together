@@ -27,7 +27,7 @@ function AuthPage() {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
 
-  async function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent): Promise<void> {
     e.preventDefault();
     setBusy(true);
     if (mode === "up") {
@@ -36,13 +36,13 @@ function AuthPage() {
         options: { emailRedirectTo: window.location.origin, data: { full_name: name } },
       });
       setBusy(false);
-      if (error) return toast.error(error.message);
-      if (!data.session) return toast.success("Check your email to confirm your account.");
+      if (error) { toast.error(error.message); return; }
+      if (!data.session) { toast.success("Check your email to confirm your account."); return; }
       navigate({ to: "/caregivers" });
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       setBusy(false);
-      if (error) return toast.error(error.message);
+      if (error) { toast.error(error.message); return; }
       navigate({ to: "/caregivers" });
     }
   }
