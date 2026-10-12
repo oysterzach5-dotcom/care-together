@@ -31,7 +31,7 @@ export const Route = createFileRoute("/caregivers/")({
   component: Browse,
 });
 
-function Select({ label, value, options, onChange }: { label: string; value?: string; options: string[]; onChange: (v?: string) => void }) {
+function Select({ label, value, options, onChange }: { label: string; value: string | undefined; options: string[]; onChange: (v?: string) => void }) {
   return (
     <div>
       <Label className="mb-1 block">{label}</Label>
