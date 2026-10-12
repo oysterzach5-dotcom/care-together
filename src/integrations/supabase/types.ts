@@ -14,7 +14,110 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          address: string
+          caregiver_id: string
+          created_at: string
+          days: number
+          hours_per_day: number
+          id: string
+          notes: string | null
+          patient_name: string
+          patient_type: string
+          start_date: string
+          status: string
+          tasks: string[]
+          user_id: string
+        }
+        Insert: {
+          address: string
+          caregiver_id: string
+          created_at?: string
+          days?: number
+          hours_per_day?: number
+          id?: string
+          notes?: string | null
+          patient_name: string
+          patient_type: string
+          start_date: string
+          status?: string
+          tasks?: string[]
+          user_id: string
+        }
+        Update: {
+          address?: string
+          caregiver_id?: string
+          created_at?: string
+          days?: number
+          hours_per_day?: number
+          id?: string
+          notes?: string | null
+          patient_name?: string
+          patient_type?: string
+          start_date?: string
+          status?: string
+          tasks?: string[]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_caregiver_id_fkey"
+            columns: ["caregiver_id"]
+            isOneToOne: false
+            referencedRelation: "caregivers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      caregivers: {
+        Row: {
+          area: string
+          available_live_in: boolean
+          bio: string
+          hourly_rate: number
+          id: string
+          languages: string[]
+          name: string
+          patient_types: string[]
+          photo_seed: string
+          rating: number
+          tasks: string[]
+          verified: boolean
+          years_experience: number
+        }
+        Insert: {
+          area: string
+          available_live_in?: boolean
+          bio: string
+          hourly_rate: number
+          id?: string
+          languages?: string[]
+          name: string
+          patient_types?: string[]
+          photo_seed: string
+          rating?: number
+          tasks?: string[]
+          verified?: boolean
+          years_experience: number
+        }
+        Update: {
+          area?: string
+          available_live_in?: boolean
+          bio?: string
+          hourly_rate?: number
+          id?: string
+          languages?: string[]
+          name?: string
+          patient_types?: string[]
+          photo_seed?: string
+          rating?: number
+          tasks?: string[]
+          verified?: boolean
+          years_experience?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
