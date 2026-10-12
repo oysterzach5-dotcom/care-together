@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.jpg.asset.json";
+import logo from "@/assets/logo-icon.png.asset.json";
 
 export function SiteHeader() {
   const [user, setUser] = useState<User | null>(null);
@@ -28,7 +28,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-30 border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo.url} alt="Care Together logo" className="h-10 w-10 rounded-full object-cover object-top" />
+          <img src={logo.url} alt="Care Together logo" className="h-11 w-11 object-contain" />
           <span className="font-display text-xl font-bold text-primary">
             Care <span className="text-accent">Together</span>
           </span>

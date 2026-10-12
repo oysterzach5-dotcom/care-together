@@ -10,12 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as AuthenticatedBookingsRouteImport } from './routes/_authenticated/bookings'
 import { Route as CaregiversIndexRouteImport } from './routes/caregivers.index'
+import { Route as CaregiversIdRouteImport } from './routes/caregivers.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
@@ -23,39 +36,82 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedBookingsRoute = AuthenticatedBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const CaregiversIndexRoute = CaregiversIndexRouteImport.update({
   id: '/caregivers/',
   path: '/caregivers/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaregiversIdRoute = CaregiversIdRouteImport.update({
+  id: '/caregivers/$id',
+  path: '/caregivers/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/bookings': typeof AuthenticatedBookingsRoute
+  '/caregivers/$id': typeof CaregiversIdRoute
   '/caregivers/': typeof CaregiversIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/bookings': typeof AuthenticatedBookingsRoute
+  '/caregivers/$id': typeof CaregiversIdRoute
   '/caregivers': typeof CaregiversIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/_authenticated/bookings': typeof AuthenticatedBookingsRoute
+  '/caregivers/$id': typeof CaregiversIdRoute
   '/caregivers/': typeof CaregiversIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/how-it-works' | '/caregivers/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/how-it-works'
+    | '/bookings'
+    | '/caregivers/$id'
+    | '/caregivers/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/how-it-works' | '/caregivers'
-  id: '__root__' | '/' | '/how-it-works' | '/caregivers/'
+  to:
+    | '/'
+    | '/auth'
+    | '/how-it-works'
+    | '/bookings'
+    | '/caregivers/$id'
+    | '/caregivers'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/how-it-works'
+    | '/_authenticated/bookings'
+    | '/caregivers/$id'
+    | '/caregivers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  CaregiversIdRoute: typeof CaregiversIdRoute
   CaregiversIndexRoute: typeof CaregiversIndexRoute
 }
 
@@ -68,12 +124,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-it-works': {
       id: '/how-it-works'
       path: '/how-it-works'
       fullPath: '/how-it-works'
       preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/bookings': {
+      id: '/_authenticated/bookings'
+      path: '/bookings'
+      fullPath: '/bookings'
+      preLoaderRoute: typeof AuthenticatedBookingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/caregivers/': {
       id: '/caregivers/'
@@ -82,12 +159,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaregiversIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/caregivers/$id': {
+      id: '/caregivers/$id'
+      path: '/caregivers/$id'
+      fullPath: '/caregivers/$id'
+      preLoaderRoute: typeof CaregiversIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedBookingsRoute: typeof AuthenticatedBookingsRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedBookingsRoute: AuthenticatedBookingsRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   HowItWorksRoute: HowItWorksRoute,
+  CaregiversIdRoute: CaregiversIdRoute,
   CaregiversIndexRoute: CaregiversIndexRoute,
 }
 export const routeTree = rootRouteImport
