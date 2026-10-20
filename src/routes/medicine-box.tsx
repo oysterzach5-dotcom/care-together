@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { AlarmClock, CalendarClock, DoorOpen, Pill, ShieldCheck, Volume2 } from "lucide-react";
-import { toast } from "sonner";
+import { formatLKR, MEDBOX_PRICE } from "@/lib/care";
 import { Button } from "@/components/ui/button";
 import img1 from "@/assets/medbox-1.jpeg.asset.json";
 import img2 from "@/assets/medbox-2.jpeg.asset.json";
@@ -57,8 +57,9 @@ function MedicineBox() {
               </div>
             ))}
           </div>
-          <Button size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90" onClick={() => toast.success("Thanks! We'll contact you about your Smart Medicine Box order.")}>
-            Order now
+          <p className="mt-8 font-display text-3xl font-bold">{formatLKR(MEDBOX_PRICE)}</p>
+          <Button asChild size="lg" className="mt-4 bg-accent text-accent-foreground hover:bg-accent/90">
+            <Link to="/order-medicine-box">Order now</Link>
           </Button>
         </div>
       </div>

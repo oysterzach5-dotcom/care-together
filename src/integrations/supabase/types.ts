@@ -118,6 +118,54 @@ export type Database = {
         }
         Relationships: []
       }
+      product_orders: {
+        Row: {
+          address: string
+          city: string
+          created_at: string
+          full_name: string
+          id: string
+          notes: string | null
+          payment_method: string
+          phone: string
+          product: string
+          quantity: number
+          status: string
+          unit_price: number
+          user_id: string
+        }
+        Insert: {
+          address: string
+          city: string
+          created_at?: string
+          full_name: string
+          id?: string
+          notes?: string | null
+          payment_method?: string
+          phone: string
+          product?: string
+          quantity?: number
+          status?: string
+          unit_price: number
+          user_id: string
+        }
+        Update: {
+          address?: string
+          city?: string
+          created_at?: string
+          full_name?: string
+          id?: string
+          notes?: string | null
+          payment_method?: string
+          phone?: string
+          product?: string
+          quantity?: number
+          status?: string
+          unit_price?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
