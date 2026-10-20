@@ -20,7 +20,7 @@ function Index() {
   return (
     <div>
       <section className="relative overflow-hidden">
-        <img src={banner.url} alt="Care Together banner" className="h-[260px] w-full object-cover sm:h-[420px]" />
+        <img src={banner.url} alt="Care Together banner" width={1920} height={960} className="h-[260px] w-full object-cover object-[70%_30%] sm:h-[420px]" />
       </section>
 
       <section className="mx-auto -mt-12 max-w-5xl px-4">
