@@ -37,6 +37,9 @@ export function SiteHeader() {
           <Link to="/caregivers" className="px-2 py-1 font-medium hover:text-accent" activeProps={{ className: "text-accent" }}>
             Find caregivers
           </Link>
+          <Link to="/medicine-box" className="px-2 py-1 font-medium hover:text-accent" activeProps={{ className: "text-accent" }}>
+            Medicine box
+          </Link>
           <Link to="/how-it-works" className="hidden px-2 py-1 font-medium hover:text-accent sm:block" activeProps={{ className: "text-accent" }}>
             How it works
           </Link>
