@@ -41,8 +41,6 @@ export function SiteHeader() {
     navigate({ to: "/auth", replace: true });
   }
 
-  const linkClass =
-    "px-2 py-1 font-medium hover:text-accent activeProps" as const;
 
   return (
     <header className="sticky top-0 z-30 border-b bg-background/90 backdrop-blur">
