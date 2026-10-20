@@ -41,3 +41,10 @@ export function formatLKR(n: number) {
 export function estimateTotal(hourlyRate: number, hoursPerDay: number, days: number) {
   return hourlyRate * hoursPerDay * days;
 }
+
+/** Smart Medicine Box price (LKR) and delivery fee. */
+export const MEDBOX_PRICE = 25000;
+export const MEDBOX_DELIVERY = 500;
+export function medboxTotal(qty: number) {
+  return MEDBOX_PRICE * qty + MEDBOX_DELIVERY;
+}
