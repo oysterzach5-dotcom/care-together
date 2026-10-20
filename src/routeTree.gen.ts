@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as MedicineBoxRouteImport } from './routes/medicine-box'
 import { Route as AuthenticatedBookingsRouteImport } from './routes/_authenticated/bookings'
 import { Route as CaregiversIndexRouteImport } from './routes/caregivers.index'
 import { Route as CaregiversIdRouteImport } from './routes/caregivers.$id'
@@ -36,6 +37,11 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MedicineBoxRoute = MedicineBoxRouteImport.update({
+  id: '/medicine-box',
+  path: '/medicine-box',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedBookingsRoute = AuthenticatedBookingsRouteImport.update({
   id: '/bookings',
   path: '/bookings',
@@ -56,6 +62,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/medicine-box': typeof MedicineBoxRoute
   '/bookings': typeof AuthenticatedBookingsRoute
   '/caregivers/$id': typeof CaregiversIdRoute
   '/caregivers/': typeof CaregiversIndexRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/medicine-box': typeof MedicineBoxRoute
   '/bookings': typeof AuthenticatedBookingsRoute
   '/caregivers/$id': typeof CaregiversIdRoute
   '/caregivers': typeof CaregiversIndexRoute
@@ -74,6 +82,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/medicine-box': typeof MedicineBoxRoute
   '/_authenticated/bookings': typeof AuthenticatedBookingsRoute
   '/caregivers/$id': typeof CaregiversIdRoute
   '/caregivers/': typeof CaregiversIndexRoute
@@ -84,6 +93,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/how-it-works'
+    | '/medicine-box'
     | '/bookings'
     | '/caregivers/$id'
     | '/caregivers/'
@@ -92,6 +102,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/how-it-works'
+    | '/medicine-box'
     | '/bookings'
     | '/caregivers/$id'
     | '/caregivers'
@@ -101,6 +112,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/how-it-works'
+    | '/medicine-box'
     | '/_authenticated/bookings'
     | '/caregivers/$id'
     | '/caregivers/'
@@ -111,6 +123,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  MedicineBoxRoute: typeof MedicineBoxRoute
   CaregiversIdRoute: typeof CaregiversIdRoute
   CaregiversIndexRoute: typeof CaregiversIndexRoute
 }
@@ -143,6 +156,13 @@ declare module '@tanstack/react-router' {
       path: '/how-it-works'
       fullPath: '/how-it-works'
       preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/medicine-box': {
+      id: '/medicine-box'
+      path: '/medicine-box'
+      fullPath: '/medicine-box'
+      preLoaderRoute: typeof MedicineBoxRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/bookings': {
@@ -185,6 +205,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   HowItWorksRoute: HowItWorksRoute,
+  MedicineBoxRoute: MedicineBoxRoute,
   CaregiversIdRoute: CaregiversIdRoute,
   CaregiversIndexRoute: CaregiversIndexRoute,
 }
