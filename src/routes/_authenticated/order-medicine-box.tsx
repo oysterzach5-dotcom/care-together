@@ -27,7 +27,7 @@ const PAYMENTS = ["Cash on delivery", "Bank transfer", "Card on delivery"];
 function OrderPage() {
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
-  const [payment, setPayment] = useState(PAYMENTS[0]);
+  const [payment, setPayment] = useState<string>("Cash on delivery");
   const [busy, setBusy] = useState(false);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
