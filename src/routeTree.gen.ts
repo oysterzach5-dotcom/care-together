@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as MedicineBoxRouteImport } from './routes/medicine-box'
 import { Route as AuthenticatedBookingsRouteImport } from './routes/_authenticated/bookings'
+import { Route as AuthenticatedOrderMedicineBoxRouteImport } from './routes/_authenticated/order-medicine-box'
 import { Route as CaregiversIndexRouteImport } from './routes/caregivers.index'
 import { Route as CaregiversIdRouteImport } from './routes/caregivers.$id'
 
@@ -47,6 +48,12 @@ const AuthenticatedBookingsRoute = AuthenticatedBookingsRouteImport.update({
   path: '/bookings',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedOrderMedicineBoxRoute =
+  AuthenticatedOrderMedicineBoxRouteImport.update({
+    id: '/order-medicine-box',
+    path: '/order-medicine-box',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const CaregiversIndexRoute = CaregiversIndexRouteImport.update({
   id: '/caregivers/',
   path: '/caregivers/',
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/how-it-works': typeof HowItWorksRoute
   '/medicine-box': typeof MedicineBoxRoute
   '/bookings': typeof AuthenticatedBookingsRoute
+  '/order-medicine-box': typeof AuthenticatedOrderMedicineBoxRoute
   '/caregivers/$id': typeof CaregiversIdRoute
   '/caregivers/': typeof CaregiversIndexRoute
 }
@@ -73,6 +81,7 @@ export interface FileRoutesByTo {
   '/how-it-works': typeof HowItWorksRoute
   '/medicine-box': typeof MedicineBoxRoute
   '/bookings': typeof AuthenticatedBookingsRoute
+  '/order-medicine-box': typeof AuthenticatedOrderMedicineBoxRoute
   '/caregivers/$id': typeof CaregiversIdRoute
   '/caregivers': typeof CaregiversIndexRoute
 }
@@ -84,6 +93,7 @@ export interface FileRoutesById {
   '/how-it-works': typeof HowItWorksRoute
   '/medicine-box': typeof MedicineBoxRoute
   '/_authenticated/bookings': typeof AuthenticatedBookingsRoute
+  '/_authenticated/order-medicine-box': typeof AuthenticatedOrderMedicineBoxRoute
   '/caregivers/$id': typeof CaregiversIdRoute
   '/caregivers/': typeof CaregiversIndexRoute
 }
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/medicine-box'
     | '/bookings'
+    | '/order-medicine-box'
     | '/caregivers/$id'
     | '/caregivers/'
   fileRoutesByTo: FileRoutesByTo
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/medicine-box'
     | '/bookings'
+    | '/order-medicine-box'
     | '/caregivers/$id'
     | '/caregivers'
   id:
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/medicine-box'
     | '/_authenticated/bookings'
+    | '/_authenticated/order-medicine-box'
     | '/caregivers/$id'
     | '/caregivers/'
   fileRoutesById: FileRoutesById
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBookingsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/order-medicine-box': {
+      id: '/_authenticated/order-medicine-box'
+      path: '/order-medicine-box'
+      fullPath: '/order-medicine-box'
+      preLoaderRoute: typeof AuthenticatedOrderMedicineBoxRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/caregivers/': {
       id: '/caregivers/'
       path: '/caregivers'
@@ -191,10 +211,12 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedBookingsRoute: typeof AuthenticatedBookingsRoute
+  AuthenticatedOrderMedicineBoxRoute: typeof AuthenticatedOrderMedicineBoxRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBookingsRoute: AuthenticatedBookingsRoute,
+  AuthenticatedOrderMedicineBoxRoute: AuthenticatedOrderMedicineBoxRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
